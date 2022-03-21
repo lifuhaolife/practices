@@ -80,7 +80,7 @@ public class ValidParenthesisString {
     }
 
     public boolean checkValidString2(String s) {
-        // minCount 和 将 * 当成 (  maxCount 将 * 当作 )
+        // minCount 和 将 * 当成 )  maxCount 将 * 当作 (
         int minCount = 0, maxCount = 0;
         int n = s.length();
 
@@ -90,13 +90,13 @@ public class ValidParenthesisString {
                 minCount++;
                 maxCount++;
             } else if (c == ')') {
-                minCount = Math.min(minCount - 1, 0);
+                minCount = Math.max(minCount - 1, 0);
                 maxCount--;
                 if (maxCount < 0) {
                     return false;
                 }
             } else {
-                minCount = Math.min(minCount - 1, 0);
+                minCount = Math.max(minCount - 1, 0);
                 maxCount++;
             }
         }
