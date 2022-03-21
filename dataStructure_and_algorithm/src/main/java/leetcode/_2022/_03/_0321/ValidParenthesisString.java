@@ -80,22 +80,23 @@ public class ValidParenthesisString {
     }
 
     public boolean checkValidString2(String s) {
-        // minCount 和 将 * 当成 )  maxCount 将 * 当作 (
+        // minCount 和 将 * 当成 (  maxCount 将 * 当作 )
         int minCount = 0, maxCount = 0;
         int n = s.length();
+
         for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
             if (c == '(') {
                 minCount++;
                 maxCount++;
             } else if (c == ')') {
-                minCount = Math.max(minCount - 1, 0);
+                minCount = Math.min(minCount - 1, 0);
                 maxCount--;
                 if (maxCount < 0) {
                     return false;
                 }
             } else {
-                minCount = Math.max(minCount - 1, 0);
+                minCount = Math.min(minCount - 1, 0);
                 maxCount++;
             }
         }
@@ -104,7 +105,7 @@ public class ValidParenthesisString {
 
     @Test
     public void test1() {
-        System.out.println(checkValidString2("(()*******))()()()"));
+        System.out.println(checkValidString("(()*******))()()()"));
     }
     //TODO: 使用动态规划贪心算法实现
 }
